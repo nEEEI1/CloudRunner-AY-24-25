@@ -4,10 +4,10 @@
 //GPIO assignment
 #define L_SPEED_PIN 9 //D9
 #define R_SPEED_PIN 10 //D10
-#define L_FORWARD A3  //A3
-#define L_BACKWARD A2 //A2
-#define R_FORWARD A0  //A0
-#define R_BACKWARD A1 //A1
+#define L_FORWARD A0  //A0
+#define L_BACKWARD A1 //A1
+#define R_FORWARD A2  //A2
+#define R_BACKWARD A3 //A3
 
 //Constants for driveMotor functions
 #define STOP_MOTORS 0
