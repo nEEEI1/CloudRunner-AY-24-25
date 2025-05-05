@@ -7,10 +7,10 @@ Connect to the bluetooth module
 #include<SoftwareSerial.h>
 
 // Define Motor Pins
-#define L_SPEED_PIN 9 //D9
-#define R_SPEED_PIN 10 //D10
-#define L_FORWARD A1 //A1
-#define L_BACKWARD A0 //A0
+#define L_SPEED_PIN 10 //D9
+#define R_SPEED_PIN 9 //D10
+#define L_FORWARD A0 //A1
+#define L_BACKWARD A1 //A0
 #define R_FORWARD A2//A2
 #define R_BACKWARD A3  //A3                                                                      
  
@@ -18,8 +18,14 @@ Connect to the bluetooth module
 SoftwareSerial BTSerial(12,13); /* (Rx,Tx) */	
 
 //Define Motor Speed
-#define Speed 40
-#define Speed_add 70
+int INITSpeed = 40;
+int Speed_add = 70;
+
+int R_offset = 0;
+int L_offset = 10;
+
+int R_Speed = INITSpeed + R_offset;
+int L_Speed = INITSpeed + L_offset;
 
 void setup() {
   
@@ -65,20 +71,21 @@ void loop() {
       DownRight();
     }
   }
+  delay(15);
 
 }
 
 void Forward() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,HIGH);
       digitalWrite(L_BACKWARD,LOW);
       digitalWrite(R_FORWARD,HIGH);
       digitalWrite(R_BACKWARD,LOW);
 }
 void Backward() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,LOW);
       digitalWrite(L_BACKWARD,HIGH);
       digitalWrite(R_FORWARD,LOW);
@@ -92,8 +99,8 @@ void Stop() {
       digitalWrite(R_BACKWARD,LOW);
 }
 void Left() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,LOW);
       digitalWrite(L_BACKWARD,HIGH);
       digitalWrite(R_FORWARD,HIGH);
@@ -101,8 +108,8 @@ void Left() {
 
 }
 void Right() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,HIGH);
       digitalWrite(L_BACKWARD,LOW);
       digitalWrite(R_FORWARD,LOW);
@@ -110,8 +117,8 @@ void Right() {
 }
 
 void UpLeft() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed + Speed_add);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed + Speed_add);
       digitalWrite(L_FORWARD,HIGH);
       digitalWrite(L_BACKWARD,LOW);
       digitalWrite(R_FORWARD,HIGH);
@@ -119,8 +126,8 @@ void UpLeft() {
 }
 
 void UpRight() {
-  analogWrite(L_SPEED_PIN, Speed + Speed_add);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed + Speed_add);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,HIGH);
       digitalWrite(L_BACKWARD,LOW);
       digitalWrite(R_FORWARD,HIGH);
@@ -128,8 +135,8 @@ void UpRight() {
 }
 
 void DownLeft() {
-  analogWrite(L_SPEED_PIN, Speed);
-  analogWrite(R_SPEED_PIN, Speed + Speed_add);
+  analogWrite(L_SPEED_PIN, L_Speed);
+  analogWrite(R_SPEED_PIN, R_Speed + Speed_add);
       digitalWrite(L_FORWARD,LOW);
       digitalWrite(L_BACKWARD,HIGH);
       digitalWrite(R_FORWARD,LOW);
@@ -137,8 +144,8 @@ void DownLeft() {
 }
 
 void DownRight() {
-  analogWrite(L_SPEED_PIN, Speed + Speed_add);
-  analogWrite(R_SPEED_PIN, Speed);
+  analogWrite(L_SPEED_PIN, L_Speed + Speed_add);
+  analogWrite(R_SPEED_PIN, R_Speed);
       digitalWrite(L_FORWARD,LOW);
       digitalWrite(L_BACKWARD,HIGH);
       digitalWrite(R_FORWARD,LOW);
